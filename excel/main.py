@@ -7,19 +7,19 @@ class OpenExcel():
 		self.visible = visible
 		self.save = save
 
-	def __call__():
+	def __call__(self):
 		self.xlapp = win32com.client.gencache.EnsureDispatch("Excel.Application")
 		self.xlapp.Visible = self.visible
 		self.xlwb = xlapp.Workbooks.Open(os.path.abspath(filepath))
 		return self.xlwb
 
-	def __enter__():
+	def __enter__(self):
 		self.xlapp = win32com.client.gencache.EnsureDispatch("Excel.Application")
 		self.xlapp.Visible = self.visible
 		self.xlwb = self.xlapp.Workbook.Open(os.path.abspath(filepath))
 		return self.xlwb
 
-	def __exit__():
+	def __exit__(self):
 		if self.save: self.xlwb.Save()
 		self.xlwb.Close()
 		self.xlapp.Quit()
