@@ -14,16 +14,13 @@ class OpenExcel():
         return self.xlwb
 
     def __enter__(self):
-        win32com.client.pythoncom.CoInitialize()
         self.xlapp = win32com.client.gencache.EnsureDispatch("Excel.Application")
         self.xlapp.Visible = self.visible
         self.xlwb = self.xlapp.Workbooks.Open(os.path.abspath(self.filepath))
         return self.xlwb
 
     def __exit__(self, exc_type, exc_value, traceback):
-        if self.save: self.xlwb.Save()
-        self.xlwb.Close()
+        self.xlwb.Close(self.save)
         self.xlapp.Quit()
-        win32com.client.pythoncom.CoUninitialize()
         del self.xlwb
         del self.xlapp
