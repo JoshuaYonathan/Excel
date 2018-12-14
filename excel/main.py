@@ -1,7 +1,7 @@
 import os
 import win32com.client
 
-class OpenExcel():
+class openxl():
     def __init__(self, filepath, visible=True, save=True):
         self.filepath = filepath
         self.visible = visible
